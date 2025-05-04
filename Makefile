@@ -1,23 +1,43 @@
 # -Syu = install latest package(s) and upgrade dependencies to latest 
-pacman := sudo pacman -Syu
-npm := pnpm i -g
+pacman := sudo pacman -S --needed
+paru := paru -Syu --needed
+pnpm := pnpm i -g
 code-ext := code --install-extension
+
+## Special Env Variables
+PNPM_HOME := $(HOME)/Library/pnpm
 
 defaultJob:
 	echo "No default job."
 
-packages: core pacman-packages nodejs-packages
+install: status/core status/apps status/nodejs-packages
 
-core:
-	$(pacman) $(shell cat install/pacman-core)
+status/core: packages/core.yaml
+	$(pacman) extra/yq  
+	$(pacman) $(shell yq -r .main[] packages/core.yaml)
+	touch status/core
 
-pacman-packages: core
-	$(pacman) $(shell cat install/pacman)
+status/apps: status/core
+	$(pacman) $(shell yq -r .main[] packages/apps.yaml)
+	$(paru)   $(shell yq -r .aur[]  packages/apps.yaml)
+	touch status/apps
 
-nodejs-packages: pacman-packages
-	$(npm) $(shell cat packages/nodejs-global)
+status/nodejs-packages: status/pacman-packages
+	mkdir -p $(PNPM_HOME)
+	pnpm config set -g global-dir "$(PNPM_HOME)"
+	mkdir -p $(PNPM_HOME)/bin
+	pnpm config set -g global-bin-dir "$(PNPM_HOME)/bin"
+	export PATH="$(PNPM_HOME)/bin:$(PATH)"
+	echo $(PATH)
+	$(pnpm)   $(shell yq -r .main[] packages/nodejs-global.yaml)
+	touch status/nodejs-packages
 
-vscode-extensions: pacman-packages
+status/vscode-extensions: status/pacman-packages
 	for EXT in $$(cat packages/vscode-extensions); do $(code-ext) $$EXT; done
+	status/vscode-extensions
 
-
+link-config-paths:
+	rm -rf $(HOME)/.config/Code/User/settings.json
+	ln -s $(HOME)/.dotfiles/config/vscode/User/settings.json $(HOME)/.config/Code/User/settings.json
+	rm -rf $(HOME)/.config/hypr
+	ln -s $(HOME)/.dotfiles/config/hypr $(HOME)/.config/hypr

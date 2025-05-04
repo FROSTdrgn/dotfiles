@@ -1,0 +1,4 @@
+main: 
+  - genpwd
+  - tsx
+

@@ -1,0 +1,7 @@
+main:
+ - cachyos-extra-v3/dolphin
+
+aur: 
+ - aur/visual-studio-code-bin
+ - aur/google-chrome
+

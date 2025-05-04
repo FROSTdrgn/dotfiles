@@ -1,0 +1,9 @@
+{
+    "chat.commandCenter.enabled": false,
+    "workbench.startupEditor": "none",
+    "telemetry.telemetryLevel": "off",
+    "telemetry.feedback.enabled": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+    "makefile.configureOnOpen": true
+}
