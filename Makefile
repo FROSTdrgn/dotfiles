@@ -18,7 +18,6 @@ status/yq:
 
 status/core: yq packages/core.yaml
 	$(pacman) $(shell yq -r .main[] packages/core.yaml)
-	$(paru)   $(shell yq -r .aur[]  packages/core.yaml)
 	touch status/core
 
 status/apps: status/core
