@@ -10,7 +10,7 @@ PNPM_HOME := $(HOME)/Library/pnpm
 defaultJob:
 	echo "No default job."
 
-install: status/core status/apps status/nodejs-packages
+install: status/core status/nodejs-packages status/apps
 
 status/core: packages/core.yaml
 	$(pacman) extra/yq  
@@ -22,7 +22,7 @@ status/apps: status/core
 	$(paru)   $(shell yq -r .aur[]  packages/apps.yaml)
 	touch status/apps
 
-status/nodejs-packages: status/pacman-packages
+status/nodejs-packages: status/core
 	mkdir -p $(PNPM_HOME)
 	pnpm config set -g global-dir "$(PNPM_HOME)"
 	mkdir -p $(PNPM_HOME)/bin
@@ -39,5 +39,3 @@ status/vscode-extensions: status/pacman-packages
 link-config-paths:
 	rm -rf $(HOME)/.config/Code/User/settings.json
 	ln -s $(HOME)/.dotfiles/config/vscode/User/settings.json $(HOME)/.config/Code/User/settings.json
-	rm -rf $(HOME)/.config/hypr
-	ln -s $(HOME)/.dotfiles/config/hypr $(HOME)/.config/hypr

@@ -1,7 +1,6 @@
 main:
- - cachyos-extra-v3/dolphin
+ - extra/discord
 
 aur: 
  - aur/visual-studio-code-bin
  - aur/google-chrome
-
