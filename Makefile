@@ -12,9 +12,13 @@ defaultJob:
 
 install: status/core status/nodejs-packages status/apps
 
-status/core: packages/core.yaml
-	$(pacman) extra/yq  
+status/yq:
+	$(pacman) extra/yq
+	touch status/yq
+
+status/core: yq packages/core.yaml
 	$(pacman) $(shell yq -r .main[] packages/core.yaml)
+	$(paru)   $(shell yq -r .aur[]  packages/core.yaml)
 	touch status/core
 
 status/apps: status/core
@@ -34,7 +38,7 @@ status/nodejs-packages: status/core
 
 status/vscode-extensions: status/pacman-packages
 	for EXT in $$(cat packages/vscode-extensions); do $(code-ext) $$EXT; done
-	status/vscode-extensions
+	touch status/vscode-extensions
 
 link-config-paths:
 	rm -rf $(HOME)/.config/Code/User/settings.json

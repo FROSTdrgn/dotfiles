@@ -8,3 +8,6 @@ main:
   # extra tools
   - cachyos-extra-v3/jq
   - cachyos-extra-v3/btop
+
+aur:
+  - aur/git-credential-manager
