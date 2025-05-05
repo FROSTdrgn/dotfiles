@@ -10,12 +10,18 @@ PNPM_HOME := $(HOME)/Library/pnpm
 defaultJob:
 	echo "No default job."
 
-install: status/core status/apps status/vscode-extensions
+install: status/core status/apps status/vscode-extensions status/fish
 
 status/core: packages/core.yaml
 	$(pacman) extra/yq
 	$(pacman) $(shell yq -r .main[] packages/core.yaml)
 	touch status/core
+
+status/fish: status/core
+	fisher install IlanCosman/tide@v6
+
+configure/fish:
+	tide configure
 
 status/apps: status/core
 	$(pacman) $(shell yq -r .main[] packages/apps.yaml)
@@ -36,6 +42,11 @@ status/vscode-extensions: status/core
 	touch status/vscode-extensions
 
 link-config-paths:
+	rm -rf $(HOME)/.config/fish
+	ln -s $(HOME)/.dotfiles/config/fish $(HOME)/.config/fish
+	mkdir -p $(HOME)/.dotfiles/config/fish/completions
+	mkdir -p $(HOME)/.dotfiles/config/fish/conf.d
+	mkdir -p $(HOME)/.dotfiles/config/fish/functions
 	rm -rf $(HOME)/.config/ghostty
 	ln -s $(HOME)/.dotfiles/config/ghostty $(HOME)/.config/ghostty
 	rm -rf $(HOME)/.config/Code/User/settings.json
