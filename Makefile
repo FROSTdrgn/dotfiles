@@ -36,6 +36,8 @@ status/vscode-extensions: status/core
 	touch status/vscode-extensions
 
 link-config-paths:
+	rm -rf $(HOME)/.config/ghostty
+	ln -s $(HOME)/.dotfiles/config/ghostty $(HOME)/.config/ghostty
 	rm -rf $(HOME)/.config/Code/User/settings.json
 	ln -s $(HOME)/.dotfiles/config/vscode/User/settings.json $(HOME)/.config/Code/User/settings.json
 	rm -rf $(HOME)/.config/hypr
