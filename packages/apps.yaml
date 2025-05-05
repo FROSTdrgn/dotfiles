@@ -1,5 +1,6 @@
 main:
  - cachyos-extra-v3/dolphin
+ - cachyos-extra-v3/ghostty
 
 aur: 
  - aur/visual-studio-code-bin
