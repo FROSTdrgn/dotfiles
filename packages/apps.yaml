@@ -1,8 +1,6 @@
 main:
- - dolphin
  - ghostty
  - discord
- - hyprpaper
 
 aur:
  - aur/visual-studio-code-bin

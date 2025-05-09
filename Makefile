@@ -12,8 +12,11 @@ defaultJob:
 
 install: status/core status/apps status/vscode-extensions
 
-status/core: packages/core.yaml
-	$(pacman) extra/yq
+status/init:
+	$(pacman) yq
+	touch status/init
+
+status/core: status/init packages/core.yaml
 	$(pacman) $(shell yq -r .main[] packages/core.yaml)
 	touch status/core
 
@@ -45,5 +48,3 @@ link-config-paths:
 	ln -s $(HOME)/.dotfiles/config/ghostty $(HOME)/.config/ghostty
 	rm -rf $(HOME)/.config/Code/User/settings.json
 	ln -s $(HOME)/.dotfiles/config/vscode/User/settings.json $(HOME)/.config/Code/User/settings.json
-	rm -rf $(HOME)/.config/hypr
-	ln -s $(HOME)/.dotfiles/config/hypr $(HOME)/.config/hypr

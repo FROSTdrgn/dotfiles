@@ -1,14 +1,10 @@
 main:
   # runtimes & package managers
-  - cachyos-extra-v3/git
-  - cachyos-v3/nodejs
-  - cachyos-v3/python
-  - extra/pnpm
-
-  # dependencies for dolphin
-  - extra/phonon-qt6-mpv
-  - cachyos-extra-v3/tevent
+  - git
+  - nodejs
+  - python
+  - pnpm
 
   # extra tools
-  - cachyos-extra-v3/jq
-  - cachyos-extra-v3/btop
+  - jq
+  - btop
