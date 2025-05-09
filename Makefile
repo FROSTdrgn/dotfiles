@@ -12,6 +12,9 @@ defaultJob:
 
 install: status/core status/apps status/vscode-extensions
 
+upgrade:
+	$(pacman) -yu
+
 status/init:
 	$(pacman) yq
 	touch status/init
