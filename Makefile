@@ -39,11 +39,6 @@ status/vscode-extensions: status/core packages/vscode-extensions.yaml
 	touch status/vscode-extensions
 
 link-config-paths:
-	rm -rf $(HOME)/.config/fish
-	ln -s $(HOME)/.dotfiles/config/fish $(HOME)/.config/fish
-	mkdir -p $(HOME)/.dotfiles/config/fish/completions
-	mkdir -p $(HOME)/.dotfiles/config/fish/conf.d
-	mkdir -p $(HOME)/.dotfiles/config/fish/functions
 	rm -rf $(HOME)/.config/ghostty
 	ln -s $(HOME)/.dotfiles/config/ghostty $(HOME)/.config/ghostty
 	rm -rf $(HOME)/.config/Code/User/settings.json
