@@ -1,7 +1,8 @@
 main:
- - cachyos-extra-v3/dolphin
- - cachyos-extra-v3/ghostty
- - extra/discord
+ - dolphin
+ - ghostty
+ - discord
+ - hyprpaper
 
 aur:
  - aur/visual-studio-code-bin
