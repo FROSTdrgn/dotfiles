@@ -1,8 +1,9 @@
 main:
  - cachyos-extra-v3/dolphin
  - cachyos-extra-v3/ghostty
+ - extra/discord
 
-aur: 
+aur:
  - aur/visual-studio-code-bin
  - aur/google-chrome
 

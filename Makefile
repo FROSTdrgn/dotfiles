@@ -10,18 +10,12 @@ PNPM_HOME := $(HOME)/Library/pnpm
 defaultJob:
 	echo "No default job."
 
-install: status/core status/apps status/vscode-extensions status/fish
+install: status/core status/apps status/vscode-extensions
 
 status/core: packages/core.yaml
 	$(pacman) extra/yq
 	$(pacman) $(shell yq -r .main[] packages/core.yaml)
 	touch status/core
-
-status/fish: status/core
-	fisher install IlanCosman/tide@v6
-
-configure/fish:
-	tide configure
 
 status/apps: status/core
 	$(pacman) $(shell yq -r .main[] packages/apps.yaml)
