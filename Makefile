@@ -10,7 +10,7 @@ PNPM_HOME := $(HOME)/Library/pnpm
 defaultJob:
 	echo "No default job."
 
-install: status/core status/apps status/vscode-extensions
+install: status/core status/apps status/vscode-extensions status/fish
 
 upgrade:
 	$(pacman) -yu
@@ -40,6 +40,10 @@ status/apps: status/core packages/apps.yaml
 status/vscode-extensions: status/core packages/vscode-extensions.yaml
 	for EXT in $(shell yq -r .main[] packages/vscode-extensions.yaml); do $(code-ext) $$EXT; done
 	touch status/vscode-extensions
+
+status/fish: status/core install/fish-tide-theme
+	install/fish-tide-theme
+	touch status/fish
 
 link-config-paths:
 	rm -rf $(HOME)/.config/ghostty

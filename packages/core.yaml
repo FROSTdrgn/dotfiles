@@ -1,5 +1,6 @@
 main:
   # runtimes & package managers
+  - gnome-keyring
   - git
   - nodejs
   - python
