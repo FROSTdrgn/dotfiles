@@ -9,3 +9,6 @@ main:
   # extra tools
   - jq
   - btop
+
+aur:
+  - aur/git-credential-oauth

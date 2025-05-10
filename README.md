@@ -6,7 +6,7 @@ Install CatchyOS via USB in a configuration with GNOME desktop, systemd-boot wit
 
 > **IMPORTANT** it's highly recommended to you press META key (WinKey) > Software and install an application called "Resources". The reason why this is so important is that with out having it open you won't be able to tell if the system is slow or something is simply abusing the living hell out of your hardware.
 >
-> For example if you have your system installed on a regular HDD instead of a SSD expect the experience to be horendous if something abuses it for a few seconds. Unfortunately tools like `btop` and similar don't actually show this properly so you're left to wonder why everything is slow with CPU, Mem, GPU doing nothing.
+> For example if you have your system installed on a regular HDD instead of a SSD expect the experience to be horendous if something abuses it for a few seconds. Unfortunately tools like `btop` and similar don't actually show this properly so you're left to wonder why everything is slow with CPU, Mem, GPU doing nothing. You can install `iotop` to find what program is actually using the HDD so intensily as if it's RAM.
 >
 > If your experience in the USB installer OS is significantly better, same reason, the OS there installs to RAM so it doesn't have this hidden HDD penalty.
 

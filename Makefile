@@ -21,6 +21,8 @@ status/init:
 
 status/core: status/init packages/core.yaml
 	$(pacman) $(shell yq -r .main[] packages/core.yaml)
+	$(paru)   $(shell yq -r .aur[]  packages/core.yaml)
+	git credential-oauth configure
 	touch status/core
 
 status/apps: status/core packages/apps.yaml
